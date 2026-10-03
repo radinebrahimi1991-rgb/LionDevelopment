@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LionDevelopment</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap');
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#060202;
+    color:#fff;
+    font-family:Inter,Arial,sans-serif;
+    min-height:100vh;
+}
+
+/* BACKGROUND */
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.08;
+    background-image:
+        linear-gradient(#ff2020 1px,transparent 1px),
+        linear-gradient(90deg,#ff2020 1px,transparent 1px);
+    background-size:50px 50px;
+}
+
+body:after{
+    content:"";
+    position:fixed;
+    width:700px;
+    height:700px;
+    top:-350px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#d90000;
+    filter:blur(220px);
+    opacity:.1;
+    pointer-events:none;
+}
+
+/* HEADER */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+
+    min-height:78px;
+    padding:13px 6%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(7,2,2,.82);
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(255,40,40,.25);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-family:"Press Start 2P";
+    font-size:14px;
+
+    text-shadow:
+        0 0 12px #ff0000,
+        3px 3px #450000;
+}
+
+.logo-icon{
+    font-size:30px;
+    filter:drop-shadow(0 0 10px #ff0000);
+}
+
+nav{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+nav button{
+    background:transparent;
+    border:0;
+    color:#888;
+
+    padding:11px 12px;
+
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+nav button:hover{
+    color:#fff;
+    text-shadow:0 0 15px #ff2020;
+}
+
+/* PAGE */
+
+.page{
+    display:none;
+    min-height:100vh;
+    padding:125px 7% 70px;
+}
+
+.page.active{
+    display:block;
+}
+
+/* HERO */
+
+.hero{
+    min-height:calc(100vh - 80px);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+
+    padding:9px 17px;
+
+    border:1px solid #ff3030;
+    border-radius:100px;
+
+    color:#ff5050;
+    background:rgba(255,0,0,.06);
+
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:2px;
+
+    box-shadow:0 0 25px rgba(255,0,0,.12);
+}
+
+.lion{
+    font-size:105px;
+    margin:30px 0 10px;
+
+    filter:
+        drop-shadow(0 0 15px #ff0000)
+        drop-shadow(0 15px 0 #250000);
+
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+.hero h1{
+    font-family:"Press Start 2P";
+    font-size:clamp(27px,6vw,68px);
+
+    background:linear-gradient(
+        180deg,
+        #fff,
+        #ff6666 35%,
+        #e00000 70%,
+        #700000
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:650px;
+    margin:25px auto;
+
+    color:#999;
+    font-size:16px;
+    line-height:1.8;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+/* BUTTON */
+
+.btn{
+    display:inline-block;
+
+    padding:15px 22px;
+
+    color:#fff;
+    text-decoration:none;
+
+    border:0;
+
+    font-weight:900;
+    font-size:11px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    clip-path:polygon(
+        0 0,
+        calc(100% - 8px) 0,
+        100% 8px,
+        100% 100%,
+        8px 100%,
+        0 calc(100% - 8px)
+    );
+}
+
+.red{
+    background:#dc1515;
+}
+
+.red:hover{
+    background:#ff2929;
+    transform:translateY(-4px);
+    box-shadow:0 10px 30px rgba(255,0,0,.3);
+}
+
+.dark{
+    background:#160707;
+    border:1px solid #541313;
+}
+
+.dark:hover{
+    border-color:#ff3030;
+    transform:translateY(-4px);
+}
+
+/* STATS */
+
+.stats{
+    width:100%;
+    max-width:800px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+
+    margin-top:65px;
+}
+
+.stat{
+    padding:22px;
+
+    background:#100404;
+    border:1px solid #3d1010;
+}
+
+.stat strong{
+    display:block;
+    color:#ff3030;
+    font-size:25px;
+    margin-bottom:7px;
+}
+
+.stat span{
+    color:#666;
+    font-size:10px;
+    font-weight:800;
+}
+
+/* SECTION */
+
+.section-title{
+    margin-bottom:42px;
+}
+
+.section-title small{
+    color:#ff3030;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:3px;
+}
+
+.section-title h2{
+    margin-top:12px;
+
+    font-family:"Press Start 2P";
+    font-size:28px;
+
+    text-shadow:4px 4px #350000;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(235px,1fr));
+    gap:22px;
+}
+
+/* CARD */
+
+.card{
+    position:relative;
+
+    padding:28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(57,7,7,.95),
+            rgba(13,3,3,.98)
+        );
+
+    border:1px solid #481313;
+
+    transition:.3s;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:#a51c1c;
+    box-shadow:0 20px 50px rgba(255,0,0,.12);
+}
+
+.icon{
+    font-size:38px;
+    margin-bottom:18px;
+    filter:drop-shadow(0 0 8px #ff1616);
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#888;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.free{
+    color:#42ff73;
+    font-size:12px;
+    font-weight:900;
+    margin:18px 0;
+}
+
+.price{
+    color:#fff;
+    font-size:27px;
+    font-weight:900;
+    margin:20px 0;
+}
+
+.price span{
+    color:#777;
+    font-size:11px;
+}
+
+/* DOWNLOAD */
+
+.download-card{
+    display:flex;
+    flex-direction:column;
+}
+
+.download-card .btn{
+    margin-top:auto;
+    text-align:center;
+}
+
+/* STORE */
+
+.store-card .btn{
+    width:100%;
+    text-align:center;
+}
+
+/* SOFTWARE */
+
+.software-box{
+    min-height:500px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    text-align:center;
+
+    border:1px solid #4a1111;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(190,0,0,.17),
+            transparent 60%
+        );
+}
+
+.software-icon{
+    font-size:90px;
+    margin-bottom:25px;
+
+    animation:float 4s infinite;
+}
+
+.software-box h2{
+    font-family:"Press Start 2P";
+    color:#ff3333;
+    font-size:26px;
+}
+
+.software-box p{
+    max-width:550px;
+    margin-top:20px;
+    color:#777;
+    line-height:1.8;
+}
+
+/* TICKETS */
+
+.ticket-container{
+    max-width:760px;
+    margin:auto;
+}
+
+.ticket-info{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.ticket-info h3{
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.ticket-info p{
+    color:#777;
+    line-height:1.7;
+}
+
+.ticket-form{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(52,7,7,.95),
+            rgba(13,3,3,.98)
+        );
+
+    border:1px solid #501313;
+    padding:35px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.field{
+    margin-bottom:20px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:9px;
+
+    color:#aaa;
+
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.field input,
+.field textarea{
+    width:100%;
+
+    padding:16px;
+
+    background:#0c0303;
+
+    border:1px solid #451010;
+    outline:none;
+
+    color:#fff;
+
+    font-family:Inter,Arial,sans-serif;
+    font-size:14px;
+
+    transition:.25s;
+}
+
+.field textarea{
+    min-height:180px;
+    resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus{
+    border-color:#ff2929;
+    box-shadow:0 0 20px rgba(255,0,0,.08);
+}
+
+.ticket-form .btn{
+    width:100%;
+}
+
+/* ================= QUESTION HUB ================= */
+
+.question-layout{
+    max-width:950px;
+    margin:auto;
+}
+
+.ask-box{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(55,7,7,.95),
+            rgba(13,3,3,.98)
+        );
+
+    border:1px solid #501313;
+    padding:28px;
+
+    margin-bottom:35px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+.ask-box h3{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.question-input,
+.answer-input{
+    width:100%;
+
+    background:#090303;
+    color:#fff;
+
+    border:1px solid #481111;
+    outline:none;
+
+    padding:15px;
+
+    font-family:Inter,Arial,sans-serif;
+    font-size:14px;
+
+    margin-bottom:13px;
+}
+
+.question-input:focus,
+.answer-input:focus{
+    border-color:#ff2929;
+}
+
+textarea.question-input{
+    min-height:130px;
+    resize:vertical;
+}
+
+.question{
+    background:#110404;
+
+    border:1px solid #431010;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    transition:.25s;
+}
+
+.question:hover{
+    border-color:#8f1b1b;
+}
+
+.question-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:14px;
+}
+
+.question-user{
+    color:#ff4141;
+    font-size:12px;
+    font-weight:900;
+}
+
+.question-time{
+    color:#555;
+    font-size:10px;
+}
+
+.question-title{
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.question-text{
+    color:#999;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.answers{
+    margin-top:22px;
+    padding-top:20px;
+    border-top:1px solid #301010;
+}
+
+.answer{
+    background:#190606;
+    border-left:3px solid #d71b1b;
+
+    padding:15px;
+    margin-top:12px;
+}
+
+.answer-name{
+    color:#ff5555;
+    font-weight:800;
+    font-size:12px;
+    margin-bottom:7px;
+}
+
+.answer-text{
+    color:#aaa;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.answer-form{
+    margin-top:20px;
+}
+
+.empty{
+    text-align:center;
+    padding:70px 20px;
+
+    color:#555;
+
+    border:1px dashed #421010;
+}
+
+/* FOOTER */
+
+footer{
+    padding:35px 7%;
+
+    border-top:1px solid #301010;
+
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:15px;
+
+    color:#555;
+    font-size:11px;
+}
+
+footer b{
+    color:#ff2929;
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    header{
+        flex-direction:column;
+        gap:7px;
+        padding:12px 3%;
+    }
+
+    .logo{
+        font-size:10px;
+    }
+
+    .logo-icon{
+        font-size:23px;
+    }
+
+    nav{
+        width:100%;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+    }
+
+    nav button{
+        flex-shrink:0;
+        padding:8px;
+        font-size:8px;
+    }
+
+    .page{
+        padding:145px 5% 60px;
+    }
+
+    .lion{
+        font-size:72px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+        margin-top:45px;
+    }
+
+    .ticket-form,
+    .ask-box{
+        padding:22px;
+    }
+
+    .question-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    footer{
+        justify-content:center;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        <span class="logo-icon">🦁</span>
+        LIONDEVELOPMENT
+    </div>
+
+    <nav>
+
+        <button onclick="showPage('home')">
+            HOME
+        </button>
+
+        <button onclick="showPage('store')">
+            STORE
+        </button>
+
+        <button onclick="showPage('downloads')">
+            DOWNLOADS
+        </button>
+
+        <button onclick="showPage('software')">
+            SOFTWARE
+        </button>
+
+        <button onclick="showPage('questions')">
+            QUESTION HUB
+        </button>
+
+        <button onclick="showPage('tickets')">
+            TICKETS
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="page active">
+
+    <div class="hero">
+
+        <div class="badge">
+            MINECRAFT DEVELOPMENT • BUILT DIFFERENT
+        </div>
+
+        <div class="lion">
+            🦁
+        </div>
+
+        <h1>
+            LIONDEVELOPMENT
+        </h1>
+
+        <p>
+            Premium Minecraft plugins, tools and software
+            built to take your server to the next level.
+        </p>
+
+        <div class="buttons">
+
+            <button
+                class="btn red"
+                onclick="showPage('downloads')">
+                EXPLORE DOWNLOADS
+            </button>
+
+            <button
+                class="btn dark"
+                onclick="showPage('store')">
+                OPEN STORE
+            </button>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>10+</strong>
+                <span>FREE PRODUCTS</span>
+            </div>
+
+            <div class="stat">
+                <strong>3</strong>
+                <span>PREMIUM PRODUCTS</span>
+            </div>
+
+            <div class="stat">
+                <strong>2026</strong>
+                <span>THE LION ERA</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DOWNLOADS ================= -->
+
+<section id="downloads" class="page">
+
+    <div class="section-title">
+        <small>FREE RESOURCES</small>
+        <h2>DOWNLOADS</h2>
+    </div>
+
+    <div class="grid">
+
+
+        <div class="card download-card">
+            <div class="icon">🌉</div>
+            <h3>LionBridge Free</h3>
+            <p>Powerful tools for Bridge gameplay and practice.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">🏠</div>
+            <h3>LionHub Free</h3>
+            <p>Create a powerful and beautiful Minecraft hub.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">🏷️</div>
+            <h3>LionTags Free</h3>
+            <p>A clean and customizable player tag system.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">👑</div>
+            <h3>LionRanks Free</h3>
+            <p>Build your own professional rank system.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">🏃</div>
+            <h3>LionParkour Free</h3>
+            <p>Create exciting parkour experiences.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">⚙️</div>
+            <h3>LionCore Free</h3>
+            <p>A lightweight foundation for Minecraft servers.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">📍</div>
+            <h3>LionSpawn Free</h3>
+            <p>Create and manage professional server spawns.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">💬</div>
+            <h3>LionChat Free</h3>
+            <p>Improve your server chat experience.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">✨</div>
+            <h3>LionWarp Free</h3>
+            <p>Simple and powerful warp management.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+
+        <div class="card download-card">
+            <div class="icon">🛡️</div>
+            <h3>LionEssentials Free</h3>
+            <p>Essential features for modern servers.</p>
+            <div class="free">FREE</div>
+            <a href="#" class="btn red">CLICK TO DOWNLOAD</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STORE ================= -->
+
+<section id="store" class="page">
+
+    <div class="section-title">
+        <small>PREMIUM PRODUCTS</small>
+        <h2>LION STORE</h2>
+    </div>
+
+    <div class="grid">
+
+
+        <div class="card store-card">
+
+            <div class="icon">⚔️</div>
+
+            <h3>LionPractice</h3>
+
+            <p>
+                A powerful Minecraft practice system
+                designed for competitive PvP servers.
+            </p>
+
+            <div class="price">
+                $10 <span>USD</span>
+            </div>
+
+            <a
+                href="https://t.me/LionDevelopment"
+                target="_blank"
+                class="btn red">
+                PURCHASE
+            </a>
+
+        </div>
+
+
+        <div class="card store-card">
+
+            <div class="icon">🛏️</div>
+
+            <h3>LionBedwars</h3>
+
+            <p>
+                Build your own competitive Bedwars
+                experience with powerful features.
+            </p>
+
+            <div class="price">
+                $6 <span>USD</span>
+            </div>
+
+            <a
+                href="https://t.me/LionDevelopment"
+                target="_blank"
+                class="btn red">
+                PURCHASE
+            </a>
+
+        </div>
+
+
+        <div class="card store-card">
+
+            <div class="icon">🌉</div>
+
+            <h3>LionBridge</h3>
+
+            <p>
+                A fast, clean and competitive
+                Bridge experience.
+            </p>
+
+            <div class="price">
+                $2 <span>USD</span>
+            </div>
+
+            <a
+                href="https://t.me/LionDevelopment"
+                target="_blank"
+                class="btn red">
+                PURCHASE
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SOFTWARE ================= -->
+
+<section id="software" class="page">
+
+    <div class="section-title">
+        <small>FUTURE PROJECTS</small>
+        <h2>SOFTWARE</h2>
+    </div>
+
+    <div class="software-box">
+
+        <div class="software-icon">
+            🦁
+        </div>
+
+        <h2>
+            COMING SOON
+        </h2>
+
+        <p>
+            Something bigger is coming.
+            LionDevelopment software is currently
+            under development.
+        </p>
+
+        <br>
+
+        <div class="badge">
+            STAY TUNED
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= QUESTION HUB ================= -->
+
+<section id="questions" class="page">
+
+    <div class="section-title">
+
+        <small>
+            COMMUNITY
+        </small>
+
+        <h2>
+            QUESTION HUB
+        </h2>
+
+    </div>
+
+
+    <div class="question-layout">
+
+
+        <!-- ASK QUESTION -->
+
+        <div class="ask-box">
+
+            <h3>
+                Ask the Community
+            </h3>
+
+            <input
+                id="questionName"
+                class="question-input"
+                type="text"
+                placeholder="Your name">
+
+            <input
+                id="questionTitle"
+                class="question-input"
+                type="text"
+                placeholder="Question title">
+
+            <textarea
+                id="questionText"
+                class="question-input"
+                placeholder="Describe your question..."></textarea>
+
+            <button
+                class="btn red"
+                onclick="addQuestion()">
+
+                POST QUESTION
+
+            </button>
+
+        </div>
+
+
+        <!-- QUESTIONS -->
+
+        <div id="questionList"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TICKETS ================= -->
+
+<section id="tickets" class="page">
+
+    <div class="section-title">
+
+        <small>
+            CUSTOMER SUPPORT
+        </small>
+
+        <h2>
+            OPEN A TICKET
+        </h2>
+
+    </div>
+
+
+    <div class="ticket-container">
+
+        <div class="ticket-info">
+
+            <h3>
+                Need Help?
+            </h3>
+
+            <p>
+                Send us a support ticket and our team
+                will receive your message by email.
+            </p>
+
+        </div>
+
+
+        <form
+            class="ticket-form"
+            action="https://formsubmit.co/radinebrahimi1991@gmail.com"
+            method="POST">
+
+            <input
+                type="hidden"
+                name="_subject"
+                value="New LionDevelopment Support Ticket">
+
+            <input
+                type="hidden"
+                name="_template"
+                value="table">
+
+            <div class="field">
+
+                <label>
+                    YOUR NAME
+                </label>
+
+                <input
+                    type="text"
+                    name="Name"
+                    placeholder="Enter your name"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    YOUR EMAIL
+                </label>
+
+                <input
+                    type="email"
+                    name="Email"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    YOUR MESSAGE
+                </label>
+
+                <textarea
+                    name="Message"
+                    placeholder="Describe your problem..."
+                    required></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn red">
+
+                SEND SUPPORT TICKET
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div>
+        © 2026 <b>LionDevelopment</b>
+    </div>
+
+    <div>
+        Minecraft Development • Built Different
+    </div>
+
+</footer>
+
+
+<script>
+
+/* ================= PAGE SYSTEM ================= */
+
+function showPage(page){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            element =>
+            element.classList.remove("active")
+        );
+
+    document
+        .getElementById(page)
+        .classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* ================= QUESTION HUB ================= */
+
+let questions =
+    JSON.parse(
+        localStorage.getItem("lionQuestions") || "[]"
+    );
+
+
+function saveQuestions(){
+
+    localStorage.setItem(
+        "lionQuestions",
+        JSON.stringify(questions)
+    );
+
+}
+
+
+function addQuestion(){
+
+    const name =
+        document.getElementById("questionName").value.trim();
+
+    const title =
+        document.getElementById("questionTitle").value.trim();
+
+    const text =
+        document.getElementById("questionText").value.trim();
+
+
+    if(!name || !title || !text){
+
+        alert("Please fill in all fields.");
+
+        return;
+    }
+
+
+    const question = {
+
+        id:Date.now(),
+
+        name:name,
+
+        title:title,
+
+        text:text,
+
+        date:new Date().toLocaleString(),
+
+        answers:[]
+
+    };
+
+
+    questions.unshift(question);
+
+    saveQuestions();
+
+    document.getElementById("questionName").value="";
+    document.getElementById("questionTitle").value="";
+    document.getElementById("questionText").value="";
+
+    renderQuestions();
+
+}
+
+
+function addAnswer(id){
+
+    const nameInput =
+        document.getElementById("answerName-"+id);
+
+    const answerInput =
+        document.getElementById("answerText-"+id);
+
+
+    const name =
+        nameInput.value.trim();
+
+    const text =
+        answerInput.value.trim();
+
+
+    if(!name || !text){
+
+        alert("Please enter your name and answer.");
+
+        return;
+    }
+
+
+    const question =
+        questions.find(q => q.id === id);
+
+
+    if(!question){
+        return;
+    }
+
+
+    question.answers.push({
+
+        name:name,
+
+        text:text,
+
+        date:new Date().toLocaleString()
+
+    });
+
+
+    saveQuestions();
+
+    renderQuestions();
+
+}
+
+
+function renderQuestions(){
+
+    const list =
+        document.getElementById("questionList");
+
+
+    if(questions.length === 0){
+
+        list.innerHTML = `
+            <div class="empty">
+                No questions yet.<br><br>
+                Be the first person to ask!
+            </div>
+        `;
+
+        return;
+    }
+
+
+    list.innerHTML =
+        questions.map(q => `
+
+        <div class="question">
+
+            <div class="question-header">
+
+                <div class="question-user">
+                    👤 ${escapeHTML(q.name)}
+                </div>
+
+                <div class="question-time">
+                    ${escapeHTML(q.date)}
+                </div>
+
+            </div>
+
+
+            <div class="question-title">
+                ${escapeHTML(q.title)}
+            </div>
+
+
+            <div class="question-text">
+                ${escapeHTML(q.text)}
+            </div>
+
+
+            <div class="answers">
+
+                <strong>
+                    💬 Answers (${q.answers.length})
+                </strong>
+
+
+                ${
+                    q.answers.length === 0
+                    ?
+                    `<p style="color:#555;margin-top:12px;">
+                        No answers yet. Be the first to help!
+                    </p>`
+                    :
+                    q.answers.map(a => `
+
+                        <div class="answer">
+
+                            <div class="answer-name">
+                                ${escapeHTML(a.name)}
+                            </div>
+
+                            <div class="answer-text">
+                                ${escapeHTML(a.text)}
+                            </div>
+
+                        </div>
+
+                    `).join("")
+                }
+
+
+                <div class="answer-form">
+
+                    <input
+                        id="answerName-${q.id}"
+                        class="answer-input"
+                        placeholder="Your name">
+
+                    <textarea
+                        id="answerText-${q.id}"
+                        class="answer-input"
+                        placeholder="Write your answer..."></textarea>
+
+                    <button
+                        class="btn red"
+                        onclick="addAnswer(${q.id})">
+
+                        POST ANSWER
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+renderQuestions();
+
+</script>
+
+</body>
+</html>
